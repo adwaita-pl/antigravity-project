@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "antigravity.cliPath": "/usr/bin/antigravity",
+    "antigravity.languageServerPath": "/usr/share/antigravity/resources/app/extensions/antigravity/bin/language_server_linux_x64",
+    "antigravity.sdk.enabled": true
+}

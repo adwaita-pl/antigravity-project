@@ -1,0 +1,49 @@
+{
+  "mcpServers": {
+    "sysadmin-tools": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "while read line; do eval $line; done"
+      ],
+      "env": {
+        "PATH": "/usr/bin:/bin:/usr/sbin:/sbin"
+      },
+      "tools": [
+        {
+          "name": "read_journalctl",
+          "description": "Reads the last 50 lines of systemd journal for a specific service. Requires service name.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "service": {
+                "type": "string",
+                "description": "The systemd service name, e.g., sshd, NetworkManager"
+              }
+            },
+            "required": ["service"]
+          },
+          "execution": "journalctl -u {{service}} -n 50 --no-pager"
+        },
+        {
+          "name": "check_firewall",
+          "description": "Returns the active ruleset for firewalld.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {}
+          },
+          "execution": "sudo firewall-cmd --list-all"
+        },
+        {
+          "name": "network_status",
+          "description": "Returns the current IP addressing and routing table.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {}
+          },
+          "execution": "ip a && echo '---' && ip route"
+        }
+      ]
+    }
+  }
+}
